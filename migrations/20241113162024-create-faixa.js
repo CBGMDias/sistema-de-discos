@@ -13,9 +13,15 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      id_disco: {
+      discoId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Discos',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
       },
       createdAt: {
         allowNull: false,

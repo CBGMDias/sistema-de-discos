@@ -20,8 +20,15 @@ module.exports = {
       capa: {
         type: Sequelize.STRING
       },
-      id_artista: {
-        type: Sequelize.INTEGER
+      artistaId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Artistas',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
       },
       createdAt: {
         allowNull: false,

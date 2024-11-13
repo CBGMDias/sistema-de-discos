@@ -1,21 +1,16 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class FaixaGenero extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      // Campo para adicionar associações futuras.
     }
   }
+
   FaixaGenero.init({
-    id_faixa: DataTypes.INTEGER,
-    id_genero: DataTypes.INTEGER
+    faixaId: DataTypes.INTEGER,
+    generoId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'FaixaGenero',

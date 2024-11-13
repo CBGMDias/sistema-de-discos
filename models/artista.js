@@ -1,25 +1,24 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Artista extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // Associação com Genero através do ArtistaGenero
+
+      // Associação com Genero através de ArtistaGenero
       Artista.belongsToMany(models.Genero, {
         through: models.ArtistaGenero,
-        foreignKey: 'id_artista',
-        otherKey: 'id_genero'
-      })
+        foreignKey: 'artistaId',
+        otherKey: 'generoId'
+      });
     }
   }
+
   Artista.init({
-    nome: DataTypes.STRING,
+    nome: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     nacionalidade: DataTypes.STRING,
     genero_musical: DataTypes.STRING,
     foto: DataTypes.STRING
