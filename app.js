@@ -10,15 +10,16 @@ app.set('views', path.join(__dirname, 'views'));
 // Middleware para parsear dados do corpo da requisição
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method'));
 
 // Configuração das rotas
+const homeRoutes = require('./routes/homeRoutes');
 const artistaRoutes = require('./routes/artistaRoutes');
 const discoRoutes = require('./routes/discoRoutes');
 const faixaRoutes = require('./routes/faixaRoutes');
 const generoRoutes = require('./routes/generoRoutes');
 
 // Definindo as rotas principais
+app.use('/', homeRoutes);
 app.use('/artistas', artistaRoutes);
 app.use('/discos', discoRoutes);
 app.use('/faixas', faixaRoutes);
@@ -35,7 +36,7 @@ app.use((req, res, next) => {
 // Inicialização do banco de dados e o servidor
 sequelize.sync({ force: false }).then(() => {
   console.log('Banco de dados conectado!');
-  app.listen(3000, () => {
+  app.listen(PORT = 3000, () => {
     console.log(`Servidor rodando na porta http://localhost:${PORT}`);
   });
 });
