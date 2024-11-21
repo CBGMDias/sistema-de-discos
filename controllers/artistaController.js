@@ -26,15 +26,16 @@ const getArtistaById = async (req, res) => {
 
 // Exibir formulário para adicionar novo artista
 const renderAddArtistaForm = (req, res) => {
-    res.render('artistas/new');
+    res.render('artistasAdd');
 };
 
 // Adicionar um novo artista
 const addArtista = async (req, res) => {
     try {
-        const { nome, nacionalidade, genero_musical, foto } = req.body;
+        const { nome, nacionalidade, genero_musical } = req.body;
+        const foto = req.file ? req.file.path : null;  // Se a foto foi carregada, usa o caminho, senão usa null
         await Artista.create({ nome, nacionalidade, genero_musical, foto });
-        res.redirect('/artistas');
+        res.redirect('/artistas');  // Redireciona após adicionar o artista
     } catch (error) {
         res.status(500).send('Erro ao adicionar artista');
     }

@@ -24,6 +24,28 @@
         </nav>
     </header>
 
+    <div class="artists-container">
+        <a href="/artistas/add" class="add-artist-button"><i class="fas fa-plus-circle"></i> Adicionar artista</a>
+            
+        <div class="artists-list">
+            <% artistas.forEach(function(artista) { %>
+                <div class="artist-item">
+                    <button class="artist-name" onclick="window.location.href='/artista/<%= artista.id %>'">
+                        <%= artista.nome %>
+                    </button>
+                    <div class="artist-options">
+                        <button class="edit-artist" onclick="window.location.href='/editar-artista/<%= artista.id %>'">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
+                        <button class="delete-artist" onclick="window.location.href='/excluir-artista/<%= artista.id %>'">
+                            <i class="fas fa-trash"></i> Excluir
+                        </button>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+
     <footer>
         <p>© 2024 BraunBeat. Todos os direitos reservados.</p>
     </footer>

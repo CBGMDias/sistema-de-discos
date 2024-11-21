@@ -60,6 +60,96 @@ nav a:hover {
     transform: scale(1.1); /* Aumenta levemente */
 }
 
+/* Container principal para os artistas */
+.artists-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+/* Botão para adicionar artista */
+.add-artist-button {
+    background-color: #FF4057;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-artist-button:hover {
+    background-color: #d0334d;
+}
+
+/* Lista de artistas */
+.artists-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+/* Item de artista */
+.artist-item {
+    background-color: #1c1c1c;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    transition: background-color 0.3s ease;
+}
+
+.artist-item:hover {
+    background-color: #333333;
+}
+
+.artist-name {
+    font-size: 1.2em;
+    background: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.artist-name:hover {
+    color: #FF4057;
+}
+
+/* Botões de editar e excluir */
+.artist-options {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-artist, .delete-artist {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: color 0.3s ease;
+}
+
+.edit-artist:hover {
+    color: #FFD700; /* Cor dourada */
+}
+
+.delete-artist:hover {
+    color: #FF6347; /* Cor tomate */
+}
+
 /* Footer */
 footer {
     text-align: center;

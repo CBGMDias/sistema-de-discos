@@ -27,6 +27,8 @@ app.use('/generos', generoRoutes);
 
 // Serve os arquivos estáticos do frontend (caso haja)
 app.use(express.static(path.join(__dirname, 'public')));
+// Servindo imagens como arquivos estáticos
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Configuração de erros 404
 app.use((req, res, next) => {
