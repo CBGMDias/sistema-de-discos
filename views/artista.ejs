@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artistas</title>
-    <link rel="stylesheet" href="css/artistas.css">
+    <title><%= artista.nome %></title>
+    <link rel="stylesheet" href="/css/artista.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,28 +24,17 @@
         </nav>
     </header>
 
-    <div class="artists-container">
-        <a href="/artistas/add" class="add-artist-button"><i class="fas fa-plus-circle"></i> Adicionar artista</a>
-            
-        <div class="artists-list">
-            <% artistas.forEach(function(artista) { %>
-                <div class="artist-item">
-                    <button class="artist-name" onclick="window.location.href='/artistas/<%= artista.id %>'">
-                        <%= artista.nome %>
-                    </button>
-                    <div class="artist-options">
-                        <button class="edit-artist" onclick="window.location.href='/editar-artista/<%= artista.id %>'">
-                            <i class="fas fa-edit"></i> Editar
-                        </button>
-                        <button class="delete-artist" onclick="window.location.href='/excluir-artista/<%= artista.id %>'">
-                            <i class="fas fa-trash"></i> Excluir
-                        </button>
-                    </div>
-                </div>
-            <% }) %>
+    <div class="artista-container">
+        <div class="foto">
+            <img src="/<%= artista.foto %>" alt="Foto de <%= artista.nome %>">
+        </div>
+        <div class="dados">
+            <h2><%= artista.nome %></h2>
+            <p><strong>Nacionalidade:</strong> <%= artista.nacionalidade %></p>
+            <p><strong>Gêneros Musicais:</strong> <%= artista.genero_musical %></p>
         </div>
     </div>
-
+    
     <footer>
         <p>© 2024 BraunBeat. Todos os direitos reservados.</p>
     </footer>

@@ -10,17 +10,19 @@ const getAllArtistas = async (req, res) => {
     }
 };
 
-// Exibir um artista específico
+// Mostrar um artista específico
 const getArtistaById = async (req, res) => {
     try {
-        const artista = await Artista.findByPk(req.params.id);
-        if (artista) {
-            res.render('artistas/show', { artista });
-        } else {
-            res.status(404).send('Artista não encontrado');
+        const { id } = req.params;
+        const artista = await Artista.findByPk(id); // Busca o artista pelo ID
+
+        if (!artista) {
+            return res.status(404).send('Artista não encontrado');
         }
+
+        res.render('artista', { artista }); // Renderiza a view com os dados do artista
     } catch (error) {
-        res.status(500).send('Erro ao exibir artista');
+        res.status(500).send('Erro ao buscar artista');
     }
 };
 
@@ -33,10 +35,14 @@ const renderAddArtistaForm = (req, res) => {
 const addArtista = async (req, res) => {
     try {
         const { nome, nacionalidade, genero_musical } = req.body;
-        const foto = req.file ? req.file.path : null;  // Se a foto foi carregada, usa o caminho, senão usa null
+
+        // Substitui separadores de caminho do Windows por '/' e remove 'public/' se necessário
+        const foto = req.file ? req.file.path.replace(/\\/g, '/').replace('public/', '') : null;
+
         await Artista.create({ nome, nacionalidade, genero_musical, foto });
-        res.redirect('/artistas');  // Redireciona após adicionar o artista
+        res.redirect('/artistas'); // Redireciona após adicionar o artista
     } catch (error) {
+        console.error(error); // Loga o erro no console para depuração
         res.status(500).send('Erro ao adicionar artista');
     }
 };
