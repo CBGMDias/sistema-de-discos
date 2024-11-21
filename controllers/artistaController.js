@@ -4,7 +4,7 @@ const { Artista } = require('../models');
 const getAllArtistas = async (req, res) => {
     try {
         const artistas = await Artista.findAll();
-        res.render('artistas/index', { artistas });
+        res.render('artistas', { artistas });
     } catch (error) {
         res.status(500).send('Erro ao listar artistas');
     }

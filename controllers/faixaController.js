@@ -4,7 +4,7 @@ const { Faixa } = require('../models');
 const getAllFaixas = async (req, res) => {
     try {
         const faixas = await Faixa.findAll();
-        res.render('faixas/index', { faixas });
+        res.render('faixas', { faixas });
     } catch (error) {
         res.status(500).send('Erro ao listar faixas');
     }

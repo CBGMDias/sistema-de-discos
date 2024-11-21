@@ -4,7 +4,7 @@ const { Genero } = require('../models');
 const getAllGeneros = async (req, res) => {
     try {
         const generos = await Genero.findAll();
-        res.render('generos/index', { generos });
+        res.render('generos', { generos });
     } catch (error) {
         res.status(500).send('Erro ao listar generos');
     }

@@ -4,7 +4,7 @@ const { Disco } = require('../models');
 const getAllDiscos = async (req, res) => {
     try {
         const discos = await Disco.findAll();
-        res.render('discos/index', { discos });
+        res.render('discos', { discos });
     } catch (error) {
         res.status(500).send('Erro ao listar discos');
     }
