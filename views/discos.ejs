@@ -26,7 +26,7 @@
 
     <div class="discos-container">
         <a href="/discos/add" class="add-disco-button"><i class="fas fa-plus-circle"></i> Adicionar Disco</a>
-            
+        
         <div class="discos-list">
             <% discos.forEach(function(disco) { %>
                 <div class="disco-item">
@@ -34,6 +34,16 @@
                         <%= disco.titulo %>
                     </button>
                     <div class="disco-options">
+                        <% if (disco.Artistum && disco.Artistum.nome) { %>
+                            <button class="artist-button linked-artist" onclick="window.location.href='/artistas/<%= disco.Artistum.id %>'">
+                                <%= disco.Artistum.nome %>
+                            </button>
+                        <% } else { %>
+                            <button class="artist-button link-artist" onclick="window.location.href='/vincular-artista/<%= disco.id %>'">
+                                Vincular artista
+                            </button>
+                        <% } %>                        
+                        <!-- Botões de editar e excluir -->
                         <button class="edit-disco" onclick="window.location.href='/editar-disco/<%= disco.id %>'">
                             <i class="fas fa-edit"></i> Editar
                         </button>
@@ -44,8 +54,8 @@
                 </div>
             <% }) %>
         </div>
-    </div>
-    
+    </div>         
+        
     <footer>
         <p>© 2024 BraunBeat. Todos os direitos reservados.</p>
     </footer>

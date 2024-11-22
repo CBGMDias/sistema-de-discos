@@ -4,12 +4,17 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Artista extends Model {
     static associate(models) {
-
       // Associação com Genero através de ArtistaGenero
       Artista.belongsToMany(models.Genero, {
         through: models.ArtistaGenero,
         foreignKey: 'artistaId',
         otherKey: 'generoId'
+      });
+
+      // Caso precise associar o artista ao disco
+      Artista.hasMany(models.Disco, {
+        foreignKey: 'artistaId',
+        as: 'discos' // Isso cria a associação onde o artista tem vários discos
       });
     }
   }
@@ -25,6 +30,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Artista',
+    tableName: 'Artista',
   });
+
   return Artista;
 };

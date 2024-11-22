@@ -1,15 +1,25 @@
-const { Disco, Faixa } = require('../models');
+const { Disco, Faixa, Artista } = require('../models');
 
 // Listar todos os discos
 const getAllDiscos = async (req, res) => {
-    try {
-        const discos = await Disco.findAll();
-        res.render('discos', { discos });
-    } catch (error) {
-        res.status(500).send('Erro ao listar discos');
-    }
+  try {
+      const discos = await Disco.findAll({
+          include: [
+              {
+                  model: Artista, // Inclui o artista associado
+                  attributes: ['id', 'nome'] // Apenas os campos necessários
+              }
+          ]
+      });
+
+      res.render('discos', { discos });
+  } catch (error) {
+      res.status(500).send('Erro ao listar discos');
+  }
 };
 
+
+// Disco específico
 const getDiscoById = async (req, res) => {
     const { id } = req.params; // Obtém o ID do disco da rota
     try {

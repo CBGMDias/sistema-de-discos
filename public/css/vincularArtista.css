@@ -60,57 +60,83 @@ nav a:hover {
     transform: scale(1.1); /* Aumenta levemente */
 }
 
-.disco-container {
-    background-color: #1c1c1c;
-    color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    margin-top: 20px;
-    max-width: 600px;
-}
-
-.dados {
+/* Container principal */
+.vincular-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #1c1c1c; /* Fundo escuro */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px;
+    margin: 50px auto;
 }
 
-h2 {
+/* Título */
+.vincular-title {
+    color: white;
     font-size: 1.8em;
-    margin-bottom: 10px;
+    font-weight: bold;
+    margin-bottom: 20px;
     text-align: center;
 }
 
-p {
+/* Formulário */
+.vincular-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+}
+
+/* Label */
+.vincular-label {
+    color: white;
     font-size: 1.1em;
-    margin: 5px 0;
+    margin-bottom: 5px;
 }
 
-h3 {
-    margin-top: 15px;
-    font-size: 1.5em;
-}
-
-/* Lista de faixas */
-ul {
-    list-style-type: none; /* Remove os marcadores padrão da lista */
-    padding: 0;
-    margin: 0;
-}
-
-ul li {
-    background-color: #333333;
+/* Select */
+.vincular-select {
     padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
     font-size: 1em;
-    transition: background-color 0.3s ease;
+    border: 2px solid #FF4057; /* Borda vermelha */
+    border-radius: 8px;
+    background-color: #333333;
+    color: white;
+    outline: none;
+    transition: border-color 0.3s ease;
+    width: 100%;
 }
 
-ul li:hover {
+.vincular-select:focus {
+    border-color: #FF6347; /* Borda mais clara ao focar */
+}
+
+/* Botão */
+.vincular-button {
     background-color: #FF4057;
     color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+}
+
+.vincular-button:hover {
+    background-color: #d0334d;
+    transform: scale(1.05); /* Pequeno aumento no hover */
+}
+
+.vincular-button:active {
+    transform: scale(0.95); /* Reduz no clique */
 }
 
 /* Footer */
