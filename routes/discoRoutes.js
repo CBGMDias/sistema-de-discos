@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const discoController = require('../controllers/discoController');
+const upload = require('../middlewares/upload');
 
 // Rota para listar todos os discos
 router.get('/', discoController.getAllDiscos);
@@ -9,7 +10,7 @@ router.get('/', discoController.getAllDiscos);
 router.get('/add', discoController.renderAddDiscoForm);
 
 // Rota para criar um novo disco
-router.post('/add', discoController.addDisco);
+router.post('/add', upload.single('capa'), discoController.addDisco);
 
 // Rota para exibir um disco específico
 router.get('/:id', discoController.getDiscoById);

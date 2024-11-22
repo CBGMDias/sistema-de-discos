@@ -60,12 +60,16 @@ const renderAddDiscoForm = (req, res) => {
 const addDisco = async (req, res) => {
     const { titulo, ano_lancamento } = req.body;
     const faixas = req.body.faixas || [];
+
+    // Substitui separadores de caminho do Windows por '/' e remove 'public/' se necessário
+    const capa = req.file ? req.file.path.replace(/\\/g, '/').replace('public/', '') : null;
   
     try {
       // Criar o disco primeiro, incluindo o ano de lançamento
       const disco = await Disco.create({ 
         titulo, 
-        ano_lancamento 
+        ano_lancamento,
+        capa 
       });
   
       // Criar as faixas associadas ao disco

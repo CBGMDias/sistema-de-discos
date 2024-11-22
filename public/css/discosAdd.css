@@ -74,7 +74,8 @@ label {
 
 /* Campos de texto */
 input[type="text"],
-input[type="number"] { /* Adicionado input[type="number"] para o campo de ano de lançamento */
+input[type="number"],
+input[type="file"] { /* Adicionado input[type="number"] para o campo de ano de lançamento */
     padding: 10px;
     font-size: 1em;
     border: 2px solid #FF4057;
@@ -85,7 +86,8 @@ input[type="number"] { /* Adicionado input[type="number"] para o campo de ano de
 }
 
 input[type="text"]:focus,
-input[type="number"]:focus { /* Adicionado para incluir foco no input de ano */
+input[type="number"]:focus,
+input[type="file"]:focus { /* Adicionado para incluir foco no input de ano */
     border-color: #FFD700;
 }
 
