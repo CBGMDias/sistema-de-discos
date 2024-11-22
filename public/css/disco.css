@@ -60,96 +60,59 @@ nav a:hover {
     transform: scale(1.1); /* Aumenta levemente */
 }
 
-/* Container principal para os discos */
-.discos-container {
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    margin-top: 50px;
-}
-
-/* Botão para adicionar disco */
-.add-disco-button {
-    background-color: #FF4057;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1em;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.add-disco-button:hover {
-    background-color: #d0334d;
-}
-
-/* Lista de discos */
-.discos-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
-}
-
-/* Item de disco */
-.disco-item {
+.disco-container {
     background-color: #1c1c1c;
     color: white;
-    padding: 15px;
+    padding: 20px;
     border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    margin-top: 50px;
     max-width: 600px;
-    transition: background-color 0.3s ease;
+    margin: 0 auto; /* Centraliza o container na página */
 }
 
-.disco-item:hover {
-    background-color: #333333;
-}
-
-.disco-name {
-    font-size: 1.2em;
-    background: none;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-.disco-name:hover {
-    color: #FF4057;
-}
-
-/* Botões de editar e excluir */
-.disco-options {
+.dados {
     display: flex;
+    flex-direction: column;
     gap: 10px;
 }
 
-.edit-disco, .delete-disco {
-    background-color: transparent;
-    border: none;
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+p {
+    font-size: 1.1em;
+    margin: 5px 0;
+}
+
+h3 {
+    margin-top: 15px;
+    font-size: 1.5em;
+}
+
+/* Lista de faixas */
+ul {
+    list-style-type: none; /* Remove os marcadores padrão da lista */
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    background-color: #333333;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+ul li:hover {
+    background-color: #FF4057;
     color: white;
-    cursor: pointer;
-    font-size: 1.2em;
-    transition: color 0.3s ease;
 }
-
-.edit-disco:hover {
-    color: #FFD700; /* Cor dourada */
-}
-
-.delete-disco:hover {
-    color: #FF6347; /* Cor tomate */
-}
-
 
 /* Footer */
 footer {

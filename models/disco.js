@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
       Disco.belongsTo(models.Artista, { 
         foreignKey: 'artistaId' 
       });
+
+      Disco.hasMany(models.Faixa, { 
+        foreignKey: 'discoId',  // Isso permite que o Disco tenha muitas faixas
+        as: 'faixas'  // Pode definir um alias aqui para acessar as faixas
+      });
     }
   }
 

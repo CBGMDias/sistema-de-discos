@@ -6,10 +6,10 @@ const discoController = require('../controllers/discoController');
 router.get('/', discoController.getAllDiscos);
 
 // Rota para exibir o formulário de criação de um novo disco
-router.get('/new', discoController.renderAddDiscoForm);
+router.get('/add', discoController.renderAddDiscoForm);
 
 // Rota para criar um novo disco
-router.post('/', discoController.addDisco);
+router.post('/add', discoController.addDisco);
 
 // Rota para exibir um disco específico
 router.get('/:id', discoController.getDiscoById);
