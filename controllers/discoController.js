@@ -10,7 +10,9 @@ const getAllDiscos = async (req, res) => {
                   as: 'artista', // Use o alias correto definido na associação
                   attributes: ['id', 'nome'] // Apenas os campos necessários
               }
-          ]
+          ],
+
+          order: [['titulo', 'ASC']] // Ordena por titulo
       });
 
       res.render('discos', { discos });

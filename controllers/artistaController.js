@@ -3,7 +3,9 @@ const { Artista, Disco } = require('../models');
 // Listar todos os artistas
 const getAllArtistas = async (req, res) => {
     try {
-        const artistas = await Artista.findAll();
+        const artistas = await Artista.findAll({
+            order: [['nome', 'ASC']] // Ordena por nome
+        });
         res.render('artistas', { artistas });
     } catch (error) {
         res.status(500).send('Erro ao listar artistas');
