@@ -34,6 +34,19 @@
             <p><strong>Gêneros Musicais:</strong> <%= artista.genero_musical %></p>
         </div>
     </div>
+
+    <div class="discos-container">
+        <h3>Discos do Artista</h3>
+        <div class="discos-list">
+            <% artista.discos.forEach(function(disco) { %>
+                <div class="disco-item">
+                    <button class="disco-name" onclick="window.location.href='/discos/<%= disco.id %>'">
+                        <%= disco.titulo %>
+                    </button>
+                </div>
+            <% }) %>
+        </div>
+    </div>
     
     <footer>
         <p>© 2024 BraunBeat. Todos os direitos reservados.</p>

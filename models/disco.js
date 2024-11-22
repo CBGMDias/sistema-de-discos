@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
 
       // Associação com Artista
       Disco.belongsTo(models.Artista, { 
-        foreignKey: 'artistaId' 
+        foreignKey: 'artistaId',
+        as: 'artista'
       });
 
       Disco.hasMany(models.Faixa, { 

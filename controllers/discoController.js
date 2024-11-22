@@ -6,7 +6,8 @@ const getAllDiscos = async (req, res) => {
       const discos = await Disco.findAll({
           include: [
               {
-                  model: Artista, // Inclui o artista associado
+                  model: Artista,
+                  as: 'artista', // Use o alias correto definido na associação
                   attributes: ['id', 'nome'] // Apenas os campos necessários
               }
           ]
@@ -14,10 +15,10 @@ const getAllDiscos = async (req, res) => {
 
       res.render('discos', { discos });
   } catch (error) {
+      console.error(error);  // Adiciona o log para depuração
       res.status(500).send('Erro ao listar discos');
   }
 };
-
 
 // Disco específico
 const getDiscoById = async (req, res) => {

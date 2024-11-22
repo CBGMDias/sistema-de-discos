@@ -38,8 +38,6 @@ router.post('/:discoId', async (req, res) => {
       return res.status(404).send('Disco não encontrado');
     }
 
-    console.log(`Atualizando disco com ID: ${disco.id} e artista ID: ${artistaId}`);
-
     // Atualizando o disco com o artista
     const updatedDisco = await Disco.update({ artistaId }, { where: { id: req.params.discoId } });
 

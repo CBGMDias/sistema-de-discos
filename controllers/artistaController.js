@@ -1,4 +1,4 @@
-const { Artista } = require('../models');
+const { Artista, Disco } = require('../models');
 
 // Listar todos os artistas
 const getAllArtistas = async (req, res) => {
@@ -10,21 +10,32 @@ const getAllArtistas = async (req, res) => {
     }
 };
 
-// Mostrar um artista específico
+// Mostrar um artista específico e seus discos
 const getArtistaById = async (req, res) => {
     try {
         const { id } = req.params;
-        const artista = await Artista.findByPk(id); // Busca o artista pelo ID
+        const artista = await Artista.findByPk(id, {
+            include: [
+                {
+                    model: Disco,
+                    as: 'discos',
+                    attributes: ['id', 'titulo']
+                }
+            ]
+        });
 
         if (!artista) {
             return res.status(404).send('Artista não encontrado');
         }
 
-        res.render('artista', { artista }); // Renderiza a view com os dados do artista
+        // Renderiza a view com os dados do artista e seus discos
+        res.render('artista', { artista });
     } catch (error) {
+        console.error(error);  // Adiciona o log para depuração
         res.status(500).send('Erro ao buscar artista');
     }
 };
+
 
 // Exibir formulário para adicionar novo artista
 const renderAddArtistaForm = (req, res) => {

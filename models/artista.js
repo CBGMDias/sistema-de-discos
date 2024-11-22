@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       // Caso precise associar o artista ao disco
       Artista.hasMany(models.Disco, {
         foreignKey: 'artistaId',
-        as: 'discos' // Isso cria a associação onde o artista tem vários discos
+        as: 'discos'
       });
     }
   }
