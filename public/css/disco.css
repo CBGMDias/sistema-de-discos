@@ -70,6 +70,18 @@ nav a:hover {
     max-width: 600px;
 }
 
+.capa {
+    padding-top: 20px;
+}
+
+.capa img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #FF4057;
+}
+
 .dados {
     display: flex;
     flex-direction: column;

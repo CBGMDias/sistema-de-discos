@@ -1,14 +1,22 @@
-const { Faixa } = require('../models');
+const { Faixa, Disco } = require('../models');
 
 // Listar todos os faixas
 const getAllFaixas = async (req, res) => {
     try {
-        const faixas = await Faixa.findAll();
+        const faixas = await Faixa.findAll({
+            include: [
+                {
+                    model: Disco, // Inclui o disco associado
+                    attributes: ['id', 'titulo'] // Apenas os campos necessários
+                }
+            ]
+        });
         res.render('faixas', { faixas });
     } catch (error) {
         res.status(500).send('Erro ao listar faixas');
     }
 };
+
 
 // Exibir um faixa específico
 const getFaixaById = async (req, res) => {
