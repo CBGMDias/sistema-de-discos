@@ -5,7 +5,7 @@ const path = require('path');
 const storage = multer.diskStorage({
   // Define a pasta onde os arquivos serão armazenados
   destination: (req, file, cb) => {
-    cb(null, 'public/images/artistas/');  // Diretório onde as fotos serão salvas
+    cb(null, 'public/images/artistasEDiscos/');  // Diretório onde as fotos serão salvas
   },
   
   // Define o nome do arquivo armazenado
