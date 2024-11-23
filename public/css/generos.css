@@ -7,8 +7,8 @@
 
 body {
     font-family: 'Gugi', sans-serif;
-    background-color: #000000; /* Fundo preto */
-    color: #ffffff; /* Texto branco */
+    background-color: #000000;
+    color: #ffffff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,7 +25,7 @@ header {
     width: 100%;
     max-width: 1200px;
     padding: 15px 30px;
-    background-color: #1c1c1c; /* Fundo do cabeçalho */
+    background-color: #1c1c1c;
     border-bottom: 2px solid #FF4057;
     position: sticky;
     top: 0;
@@ -34,8 +34,8 @@ header {
 
 /* Logo */
 .logo img {
-    height: 50px; /* Redimensiona para altura fixa */
-    width: auto; /* Mantém a proporção da imagem */
+    height: 50px;
+    width: auto;
 }
 
 /* Navegação */
@@ -45,7 +45,7 @@ nav {
 }
 
 nav a {
-    color: #ffffff; /* Cor do texto */
+    color: #ffffff;
     text-decoration: none;
     font-size: 1em;
     font-weight: 500;
@@ -55,9 +55,101 @@ nav a {
 }
 
 nav a:hover {
-    background-color: #FF4057; /* Fundo ao passar o mouse */
-    color: #ffffff; /* Texto branco */
-    transform: scale(1.1); /* Aumenta levemente */
+    background-color: #FF4057;
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+/* Container principal para os gêneros */
+.genres-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+/* Botão para adicionar gênero */
+.add-genre-button {
+    background-color: #FF4057;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-genre-button:hover {
+    background-color: #d0334d;
+}
+
+/* Lista de gêneros */
+.genres-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 400px    ;
+    align-items: center;
+}
+
+/* Item de gênero */
+.genre-item {
+    background-color: #1c1c1c;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    transition: background-color 0.3s ease;
+}
+
+.genre-item:hover {
+    background-color: #333333;
+}
+
+.genre-name {
+    font-size: 1.2em;
+    background: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.genre-name:hover {
+    color: #FF4057;
+}
+
+/* Botões de editar e excluir */
+.genre-options {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-genre, .delete-genre {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: color 0.3s ease;
+}
+
+.edit-genre:hover {
+    color: #FFD700;
+}
+
+.delete-genre:hover {
+    color: #FF6347;
 }
 
 /* Footer */

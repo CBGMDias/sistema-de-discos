@@ -26,7 +26,7 @@ const getGeneroById = async (req, res) => {
 
 // Exibir formulário para adicionar novo genero
 const renderAddGeneroForm = (req, res) => {
-    res.render('generos/new');
+    res.render('generosAdd');
 };
 
 // Adicionar um novo genero

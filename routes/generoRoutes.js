@@ -6,10 +6,10 @@ const generoController = require('../controllers/generoController');
 router.get('/', generoController.getAllGeneros);
 
 // Rota para exibir o formulário de criação de um novo genero
-router.get('/new', generoController.renderAddGeneroForm);
+router.get('/add', generoController.renderAddGeneroForm);
 
 // Rota para criar um novo genero
-router.post('/', generoController.addGenero);
+router.post('/add', generoController.addGenero);
 
 // Rota para exibir um genero específico
 router.get('/:id', generoController.getGeneroById);
