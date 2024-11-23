@@ -33,8 +33,14 @@
             <label for="nacionalidade">Nacionalidade</label>
             <input type="text" id="nacionalidade" name="nacionalidade" required>
 
-            <label for="genero_musical">Gênero Musical</label>
-            <input type="text" id="genero_musical" name="genero_musical" required>
+            <p>Gêneros:</p>
+            <div class="generos-checkbox">
+                <% generos.forEach((genero) => { %>
+                    <input type="checkbox" id="genero_<%= genero.id %>" name="generos[]" value="<%= genero.id %>">
+                    <label for="genero_<%= genero.id %>"><%= genero.nome %></label>
+                <% }); %>
+            </div>
+            <a href="/generos/add">Adicionar Gênero</a>
 
             <label for="foto">Foto do Artista</label>
             <input type="file" id="foto" name="foto" accept="image/*" required>

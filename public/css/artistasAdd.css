@@ -119,6 +119,50 @@ input[type="text"]:focus, input[type="file"]:focus {
     background-color: #d0334d;
 }
 
+/* Estilo para as caixas de seleção (checkboxes) */
+input[type="checkbox"] {
+    accent-color: #FF4057; /* Cor do botão de seleção (marca) */
+    margin-left: 10px;
+    margin-right: 10px;
+    transform: scale(1.2); /* Aumenta o tamanho da checkbox */
+    cursor: pointer;
+}
+
+/* Estilo para as labels ao lado das checkboxes */
+input[type="checkbox"] + label {
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+/* Alinhamento das checkboxes e labels em linha */
+.form-container p {
+    margin: 10px 0 15px;
+    font-size: 1.2em;
+}
+
+.form-container input[type="checkbox"]:checked + label {
+    font-weight: bold; /* Deixa o texto do gênero em negrito quando a checkbox estiver marcada */
+}
+
+/* Estilo de hover sobre as labels */
+input[type="checkbox"]:hover + label {
+    text-decoration: underline;
+}
+
+/* Ajustando o link "Adicionar Gênero" */
+.form-container a {
+    color:#FF4057;
+    font-size: 1em;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.form-container a:hover {
+    color: #d0334d;
+}
+
 /* Footer */
 footer {
     text-align: center;

@@ -25,7 +25,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     nacionalidade: DataTypes.STRING,
-    genero_musical: DataTypes.STRING,
     foto: DataTypes.STRING
   }, {
     sequelize,

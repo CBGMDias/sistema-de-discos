@@ -1,45 +1,39 @@
-'use strict';
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('ArtistaGeneros', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      artistaId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Artistas',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-      },
-      generoId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Generos',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
-    });
+  up: async (queryInterface, Sequelize) => {
+      await queryInterface.createTable('ArtistaGeneros', {
+          artistaId: {
+              type: Sequelize.INTEGER,
+              allowNull: false,
+              references: {
+                  model: 'Artistas', // Nome da tabela Artistas
+                  key: 'id',
+              },
+              onUpdate: 'CASCADE',
+              onDelete: 'CASCADE',
+          },
+          generoId: {
+              type: Sequelize.INTEGER,
+              allowNull: false,
+              references: {
+                  model: 'Generos', // Nome da tabela Generos
+                  key: 'id',
+              },
+              onUpdate: 'CASCADE',
+              onDelete: 'CASCADE',
+          },
+          createdAt: {
+              type: Sequelize.DATE,
+              allowNull: false,
+              defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'), // Garante valor padrão
+          },
+          updatedAt: {
+              type: Sequelize.DATE,
+              allowNull: false,
+              defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'), // Garante valor padrão
+          },
+      });
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('ArtistaGeneros');
-  }
+  down: async (queryInterface) => {
+      await queryInterface.dropTable('ArtistaGeneros');
+  },
 };
