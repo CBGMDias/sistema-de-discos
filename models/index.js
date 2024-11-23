@@ -31,6 +31,7 @@ fs
     db[model.name] = model;
   });
 
+// Garanta que a associação é feita após carregar todos os modelos
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);

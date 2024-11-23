@@ -149,6 +149,16 @@ input[type="checkbox"]:hover + label {
     text-decoration: underline;
 }
 
+/* Classe para organizar as checkboxes em várias colunas */
+.generos-checkbox {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 20px; /* Espaço entre as checkboxes */
+    width: 100%;
+    max-width: 1200px; /* Limita a largura do contêiner das checkboxes */
+    margin-top: 20px;
+}
+
 /* Ajustando o link "Adicionar Gênero" */
 .form-container a {
     color:#FF4057;

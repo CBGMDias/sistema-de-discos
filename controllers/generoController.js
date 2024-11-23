@@ -3,7 +3,9 @@ const { Genero } = require('../models');
 // Listar todos os generos
 const getAllGeneros = async (req, res) => {
     try {
-        const generos = await Genero.findAll();
+        const generos = await Genero.findAll({
+            order: [['nome', 'ASC']] // Ordena em ordem alfabetica
+        });
         res.render('generos', { generos });
     } catch (error) {
         res.status(500).send('Erro ao listar generos');

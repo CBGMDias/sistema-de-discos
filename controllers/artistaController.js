@@ -12,7 +12,7 @@ const getAllArtistas = async (req, res) => {
     }
 };
 
-// Mostrar um artista específico e seus discos
+// Mostrar um artista específico e seus discos e gêneros
 const getArtistaById = async (req, res) => {
     try {
         const { id } = req.params;
@@ -22,6 +22,11 @@ const getArtistaById = async (req, res) => {
                     model: Disco,
                     as: 'discos',
                     attributes: ['id', 'titulo']
+                },
+                {
+                    model: Genero,
+                    as: 'generos',  // Certifique-se de que o alias aqui é o mesmo definido na associação
+                    attributes: ['id', 'nome']
                 }
             ]
         });
@@ -30,14 +35,12 @@ const getArtistaById = async (req, res) => {
             return res.status(404).send('Artista não encontrado');
         }
 
-        // Renderiza a view com os dados do artista e seus discos
         res.render('artista', { artista });
     } catch (error) {
-        console.error(error);  // Adiciona o log para depuração
+        console.error(error);
         res.status(500).send('Erro ao buscar artista');
     }
 };
-
 
 // Exibir formulário para adicionar um novo artista
 const renderAddArtistaForm = async (req, res) => {

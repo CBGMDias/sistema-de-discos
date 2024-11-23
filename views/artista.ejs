@@ -31,7 +31,13 @@
         <div class="dados">
             <h2><%= artista.nome %></h2>
             <p><strong>Nacionalidade:</strong> <%= artista.nacionalidade %></p>
-            <p><strong>Gêneros Musicais:</strong> generos teste </p>
+            <p><strong>Gêneros Musicais:</strong> 
+                <% if (artista.generos && artista.generos.length > 0) { %>
+                    <%= artista.generos.map(genero => genero.nome).join(', ') %>
+                <% } else { %>
+                    Nenhum gênero associado
+                <% } %>
+            </p>
         </div>
     </div>
 

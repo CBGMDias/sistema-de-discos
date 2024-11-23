@@ -87,14 +87,14 @@ nav a:hover {
     background-color: #d0334d;
 }
 
-/* Lista de gêneros */
 .genres-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 4 colunas de tamanho igual */
+    gap: 10px; /* Espaço entre os itens */
     width: 100%;
-    max-width: 400px    ;
-    align-items: center;
+    max-width: 1200px; /* Máximo de largura */
+    justify-items: center; /* Alinha os itens no centro das colunas */
+    align-items: center; /* Alinha os itens no centro das linhas */
 }
 
 /* Item de gênero */
@@ -106,8 +106,9 @@ nav a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    max-width: 600px;
+    width: 85%;
+    height: 70px;
+    max-width: 400px; /* Limita o tamanho máximo dos itens */
     transition: background-color 0.3s ease;
 }
 
