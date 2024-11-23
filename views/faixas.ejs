@@ -25,33 +25,46 @@
     </header>
 
     <div class="faixas-container">
-        <% faixas.forEach(function(faixa) { %>
+        <% if (faixas && faixas.length > 0) { %>
+          <% faixas.forEach(function(faixa) { %>
             <div class="faixa-item">
-                <h3 class="faixa-titulo"><%= faixa.titulo %></h3>
-    
-                <!-- Exibir o nome do disco vinculado -->
-                <% if (faixa.Disco) { %>
-                    <button class="disco-button linked-disco" onclick="window.location.href='/discos/<%= faixa.Disco.id %>'">
-                        Disco: <%= faixa.Disco.titulo %> 
-                    </button>
-                <% } else { %>
-                    <button class="disco-button link-disco" onclick="window.location.href='/vincular-disco/<%= faixa.id %>'">
-                        Vincular disco
-                    </button>
-                <% } %>
-    
-                <!-- Opções de editar e excluir faixa -->
-                <div class="faixa-options">
-                    <button class="edit-faixa" onclick="window.location.href='/editar-faixa/<%= faixa.id %>'">
-                        <i class="fas fa-edit"></i> Editar
-                    </button>
-                    <button class="delete-faixa" onclick="window.location.href='/excluir-faixa/<%= faixa.id %>'">
-                        <i class="fas fa-trash"></i> Excluir
-                    </button>
-                </div>
+              <h3 class="faixa-titulo"><%= faixa.titulo %></h3>
+      
+              <!-- Exibir os gêneros associados à faixa -->
+              <% if (faixa.Generos && faixa.Generos.length > 0) { %>
+                <% faixa.Generos.forEach(function(genero) { %>
+                  <p><%= genero.nome %></p> <!-- Nome do gênero -->
+                <% }) %>
+              <% } else { %>
+                <p>Nenhum gênero associado</p>
+              <% } %>
+      
+              <!-- Exibir o nome do disco vinculado -->
+              <% if (faixa.Disco) { %>
+                <button class="disco-button linked-disco" onclick="window.location.href='/discos/<%= faixa.Disco.id %>'">
+                  Disco: <%= faixa.Disco.titulo %> 
+                </button>
+              <% } else { %>
+                <button class="disco-button link-disco" onclick="window.location.href='/vincular-disco/<%= faixa.id %>'">
+                  Vincular disco
+                </button>
+              <% } %>
+      
+              <!-- Opções de editar e excluir faixa -->
+              <div class="faixa-options">
+                <button class="edit-faixa" onclick="window.location.href='/editar-faixa/<%= faixa.id %>'">
+                  <i class="fas fa-edit"></i> Editar
+                </button>
+                <button class="delete-faixa" onclick="window.location.href='/excluir-faixa/<%= faixa.id %>'">
+                  <i class="fas fa-trash"></i> Excluir
+                </button>
+              </div>
             </div>
-        <% }) %>
-    </div>
+          <% }) %>
+        <% } else { %>
+          <p>Nenhuma faixa encontrada</p>
+        <% } %>
+      </div>         
 
     <footer>
         <p>© 2024 BraunBeat. Todos os direitos reservados.</p>
