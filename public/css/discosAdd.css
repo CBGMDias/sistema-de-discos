@@ -137,6 +137,34 @@ button[type="submit"]:hover {
     flex-grow: 1;
 }
 
+/* Estilização do select de gênero */
+.generos-select select {
+    padding: 8px;
+    font-size: 1em;
+    border: 2px solid #FF4057;
+    border-radius: 5px;
+    background-color: #333333;
+    color: white;
+    transition: border-color 0.3s ease;
+    width: 100%; /* Ajuste para que o select ocupe toda a largura */
+}
+
+.generos-select select:focus {
+    border-color: #FFD700; /* Cor da borda quando o select estiver em foco */
+}
+
+/* Estilo para o label de gênero */
+.generos-select label {
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Ajusta o espaçamento entre as faixas */
+#faixas {
+    margin-top: 10px;
+}
 
 /* Navegação */
 nav {

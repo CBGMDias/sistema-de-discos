@@ -48,7 +48,7 @@ const renderAddArtistaForm = async (req, res) => {
       const generos = await Genero.findAll(); // Busca todos os gêneros cadastrados
       res.render('artistasAdd', { generos }); // Passa os gêneros para a view
     } catch (error) {
-      console.error(error); // Loga erros no console para depuração
+      console.error(error);
       res.status(500).send('Erro ao carregar o formulário de adição');
     }
   };

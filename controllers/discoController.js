@@ -1,4 +1,4 @@
-const { Disco, Faixa, Artista } = require('../models');
+const { Disco, Faixa, Artista, Genero, FaixaGenero, sequelize } = require('../models');
 
 // Listar todos os discos
 const getAllDiscos = async (req, res) => {
@@ -52,44 +52,65 @@ const getDiscoById = async (req, res) => {
   
 
 // Exibir formulário para adicionar novo disco
-const renderAddDiscoForm = (req, res) => {
-    res.render('discosAdd');
+const renderAddDiscoForm = async (req, res) => {
+  try {
+      const generos = await Genero.findAll({
+        order: [['nome', 'ASC']] // Ordena em ordem alfabetica
+      }); // Busca todos os gêneros cadastrados
+      res.render('discosAdd', { generos }); // Passa os gêneros para a view
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Erro ao carregar o formulário de adição');
+    }
 };
 
 // Adicionar um novo disco
 const addDisco = async (req, res) => {
-    const { titulo, ano_lancamento } = req.body;
-    const faixas = req.body.faixas || [];
+  const { titulo, ano_lancamento } = req.body;
+  const faixas = req.body.faixas || [];
+  const faixaGeneros = req.body.faixaGeneros || []; // Aqui, temos um array com os gêneros de cada faixa
 
-    // Substitui separadores de caminho do Windows por '/' e remove 'public/' se necessário
-    const capa = req.file ? req.file.path.replace(/\\/g, '/').replace('public/', '') : null;
-  
-    try {
-      // Criar o disco primeiro, incluindo o ano de lançamento
-      const disco = await Disco.create({ 
-        titulo, 
-        ano_lancamento,
-        capa 
-      });
-  
-      // Criar as faixas associadas ao disco
-      const faixasToCreate = faixas.map(faixaTitulo => ({
-        titulo: faixaTitulo,
-        discoId: disco.id,
-      }));
-  
-      if (faixasToCreate.length > 0) {
-        await Faixa.bulkCreate(faixasToCreate); // Cria todas as faixas de uma vez
+  // Substitui separadores de caminho do Windows por '/' e remove 'public/' se necessário
+  const capa = req.file ? req.file.path.replace(/\\/g, '/').replace('public/', '') : null;
+
+  try {
+    // Criar o disco primeiro, incluindo o ano de lançamento
+    const disco = await Disco.create({ 
+      titulo, 
+      ano_lancamento,
+      capa 
+    });
+
+    // Criar as faixas associadas ao disco
+    const faixasToCreate = faixas.map(faixaTitulo => ({
+      titulo: faixaTitulo,
+      discoId: disco.id,
+    }));
+
+    // Adicionar as faixas
+    const faixasCriadas = await Faixa.bulkCreate(faixasToCreate);
+
+    // Associar os gêneros para cada faixa individualmente
+    for (let i = 0; i < faixasCriadas.length; i++) {
+      const faixa = faixasCriadas[i];
+      const generoId = faixaGeneros[i]; // Pega o gênero selecionado para cada faixa
+
+      if (generoId) {
+        // Criar a associação na tabela FaixaGenero
+        await FaixaGenero.create({
+          faixaId: faixa.id,
+          generoId: generoId,
+        });
       }
-  
-      // Redirecionar para a página de discos
-      res.redirect('/discos');
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Erro ao adicionar disco e faixas');
     }
-  };
-  
+
+    // Redirecionar para a página de discos
+    res.redirect('/discos');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Erro ao adicionar disco e faixas');
+  }
+};
 
 // Exibir formulário para edição de disco
 const renderEditDiscoForm = async (req, res) => {
