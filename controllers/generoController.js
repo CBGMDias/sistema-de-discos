@@ -69,17 +69,36 @@ const updateGenero = async (req, res) => {
     }
 };
 
-// Deletar um genero
+// Rota para deletar um gênero
 const deleteGenero = async (req, res) => {
-    try {
-        await Genero.destroy({
-            where: { id: req.params.id }
-        });
-        res.redirect('/generos');
-    } catch (error) {
-        res.status(500).send('Erro ao deletar genero');
+    const method = req.body._method;
+
+    if (method === 'DELETE') {
+        try {
+            const generoId = req.params.id;
+
+            // Verificar se o gênero existe
+            const genero = await Genero.findByPk(generoId);
+
+            if (!genero) {
+                return res.status(404).send('Gênero não encontrado');
+            }
+
+            // Excluir o gênero
+            await genero.destroy();
+
+            // Redirecionar após exclusão
+            return res.redirect('/generos');
+        } catch (error) {
+            console.error('Erro ao excluir gênero:', error);
+            return res.status(500).send('Erro ao excluir o gênero');
+        }
     }
+
+    // Método não permitido
+    return res.status(405).send('Método não permitido');
 };
+
 
 module.exports = {
     getAllGeneros,

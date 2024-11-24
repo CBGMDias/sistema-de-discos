@@ -21,6 +21,6 @@ router.get('/:id/edit', generoController.renderEditGeneroForm);
 router.put('/:id', generoController.updateGenero);
 
 // Rota para deletar um genero
-router.delete('/:id', generoController.deleteGenero);
+router.post('/:id', generoController.deleteGenero);
 
 module.exports = router;

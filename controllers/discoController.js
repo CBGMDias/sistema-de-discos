@@ -139,39 +139,52 @@ const updateDisco = async (req, res) => {
     }
 };
 
+const fs = require('fs'); // Importar o módulo File System
+
 // Rota para deletar um disco
 const deleteDisco = async (req, res) => {
-  const method = req.body._method;
+    const method = req.body._method;
 
-  if (method === 'DELETE') {
-      try {
-          const discoId = req.params.id;
+    if (method === 'DELETE') {
+        try {
+            const discoId = req.params.id;
 
-          // Verificar se o disco existe
-          const disco = await Disco.findByPk(discoId);
+            // Verificar se o disco existe
+            const disco = await Disco.findByPk(discoId);
 
-          if (!disco) {
-              return res.status(404).send('Disco não encontrado');
-          }
+            if (!disco) {
+                return res.status(404).send('Disco não encontrado');
+            }
 
-          // Excluir as faixas associadas ao disco
-          await Faixa.destroy({
-              where: { discoId }
-          });
+            // Excluir as faixas associadas ao disco
+            await Faixa.destroy({
+                where: { discoId }
+            });
 
-          // Excluir o disco
-          await disco.destroy();
+            // Excluir a imagem da capa, se existir
+            if (disco.capa) {
+                fs.unlink(`public/${disco.capa}`, (err) => {
+                    if (err) {
+                        console.error(`Erro ao excluir a capa do disco: ${err}`);
+                    } else {
+                        console.log(`Capa excluída: ${disco.capa}`);
+                    }
+                });
+            }
 
-          // Redirecionar após exclusão
-          return res.redirect('/discos');
-      } catch (error) {
-          console.error('Erro ao excluir disco:', error);
-          return res.status(500).send('Erro ao excluir o disco');
-      }
-  }
+            // Excluir o disco
+            await disco.destroy();
 
-  // Método não permitido
-  return res.status(405).send('Método não permitido');
+            // Redirecionar após exclusão
+            return res.redirect('/discos');
+        } catch (error) {
+            console.error('Erro ao excluir disco:', error);
+            return res.status(500).send('Erro ao excluir o disco');
+        }
+    }
+
+    // Método não permitido
+    return res.status(405).send('Método não permitido');
 };
 
 module.exports = {

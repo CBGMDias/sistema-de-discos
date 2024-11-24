@@ -37,9 +37,14 @@
                         <button class="edit-genre" onclick="window.location.href='/generos/edit/<%= genero.id %>'">
                             <i class="fas fa-edit"></i> Editar
                         </button>
-                        <button class="delete-genre" onclick="window.location.href='/generos/delete/<%= genero.id %>'">
-                            <i class="fas fa-trash"></i> Excluir
-                        </button>
+
+                        <form action="/generos/<%= genero.id %>" method="POST" onsubmit="return confirm('Você tem certeza que deseja excluir este genero?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="delete-genre">
+                                <i class="fas fa-trash"></i> Excluir
+                            </button>
+                        </form>
+
                     </div>
                 </div>
             <% }) %>
