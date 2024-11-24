@@ -18,7 +18,7 @@ router.get('/:id', generoController.getGeneroById);
 router.get('/:id/edit', generoController.renderEditGeneroForm);
 
 // Rota para atualizar um genero
-router.put('/:id', generoController.updateGenero);
+router.post('/:id/edit', generoController.updateGenero);
 
 // Rota para deletar um genero
 router.post('/:id', generoController.deleteGenero);

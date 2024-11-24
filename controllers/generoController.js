@@ -47,7 +47,7 @@ const renderEditGeneroForm = async (req, res) => {
     try {
         const genero = await Genero.findByPk(req.params.id);
         if (genero) {
-            res.render('generos/edit', { genero });
+            res.render('generosEdit', { genero });
         } else {
             res.status(404).send('Genero não encontrado');
         }
@@ -56,17 +56,36 @@ const renderEditGeneroForm = async (req, res) => {
     }
 };
 
-// Atualizar um genero existente
+// Rota para atualizar um gênero
 const updateGenero = async (req, res) => {
-    try {
-        const { nome } = req.body;
-        await Genero.update({ nome }, {
-            where: { id: req.params.id }
-        });
-        res.redirect('/generos');
-    } catch (error) {
-        res.status(500).send('Erro ao atualizar genero');
+    const method = req.body._method;
+
+    if (method === 'PUT') {
+        try {
+            const generoId = req.params.id;
+            const novoNome = req.body.nome;
+
+            // Verificar se o gênero existe
+            const genero = await Genero.findByPk(generoId);
+
+            if (!genero) {
+                return res.status(404).send('Gênero não encontrado');
+            }
+
+            // Atualizar o nome do gênero
+            genero.nome = novoNome;
+            await genero.save();
+
+            // Redirecionar após atualização
+            return res.redirect('/generos');
+        } catch (error) {
+            console.error('Erro ao atualizar gênero:', error);
+            return res.status(500).send('Erro ao atualizar o gênero');
+        }
     }
+
+    // Método não permitido
+    return res.status(405).send('Método não permitido');
 };
 
 // Rota para deletar um gênero
