@@ -139,16 +139,39 @@ const updateDisco = async (req, res) => {
     }
 };
 
-// Deletar um disco
+// Rota para deletar um disco
 const deleteDisco = async (req, res) => {
-    try {
-        await Disco.destroy({
-            where: { id: req.params.id }
-        });
-        res.redirect('/discos');
-    } catch (error) {
-        res.status(500).send('Erro ao deletar disco');
-    }
+  const method = req.body._method;
+
+  if (method === 'DELETE') {
+      try {
+          const discoId = req.params.id;
+
+          // Verificar se o disco existe
+          const disco = await Disco.findByPk(discoId);
+
+          if (!disco) {
+              return res.status(404).send('Disco não encontrado');
+          }
+
+          // Excluir as faixas associadas ao disco
+          await Faixa.destroy({
+              where: { discoId }
+          });
+
+          // Excluir o disco
+          await disco.destroy();
+
+          // Redirecionar após exclusão
+          return res.redirect('/discos');
+      } catch (error) {
+          console.error('Erro ao excluir disco:', error);
+          return res.status(500).send('Erro ao excluir o disco');
+      }
+  }
+
+  // Método não permitido
+  return res.status(405).send('Método não permitido');
 };
 
 module.exports = {

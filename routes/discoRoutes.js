@@ -22,6 +22,6 @@ router.get('/:id/edit', discoController.renderEditDiscoForm);
 router.put('/:id', discoController.updateDisco);
 
 // Rota para deletar um disco
-router.delete('/:id', discoController.deleteDisco);
+router.post('/:id', discoController.deleteDisco);
 
 module.exports = router;

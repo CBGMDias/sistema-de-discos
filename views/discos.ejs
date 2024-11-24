@@ -48,12 +48,12 @@
                             <i class="fas fa-edit"></i> Editar
                         </button>
 
-                        <form action="/discos/<%= disco.id %>" method="POST" onsubmit="return confirm('Você tem certeza que deseja excluir este disco?');">
+                        <form action="/discos/<%= disco.id %>" method="POST" onsubmit="return confirm('Você tem certeza que deseja excluir este disco? Todas as faixas serão apagadas!');">
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" class="delete-disco">
                                 <i class="fas fa-trash"></i> Excluir
                             </button>
-                          </form>
+                        </form>                        
 
                     </div>
                 </div>
