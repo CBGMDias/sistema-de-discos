@@ -87,29 +87,8 @@ const updateFaixa = async (req, res) => {
     }
 };
 
-// Deletar um faixa
+// Rota pra deletar uma faixa
 const deleteFaixa = async (req, res) => {
-    const faixaId = req.params.id;
-    
-    try {
-        // Verificar se a faixa existe
-        const faixa = await Faixa.findByPk(faixaId);
-
-        if (!faixa) {
-            return res.status(404).send('Faixa não encontrada');
-        }
-
-        // Excluir a faixa
-        await faixa.destroy();
-
-        // Redirecionar para a página de faixas após exclusão
-        res.redirect('/faixas');
-    } catch (error) {
-        res.status(500).send('Erro ao excluir a faixa');
-    }
-};
-
-const postAuxiliar = async (req, res) => {
     const method = req.body._method;
 
     if (method === 'DELETE') {
@@ -140,5 +119,4 @@ module.exports = {
     renderEditFaixaForm,
     updateFaixa,
     deleteFaixa,
-    postAuxiliar
 };

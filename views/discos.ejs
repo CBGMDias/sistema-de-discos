@@ -47,9 +47,14 @@
                         <button class="edit-disco" onclick="window.location.href='/editar-disco/<%= disco.id %>'">
                             <i class="fas fa-edit"></i> Editar
                         </button>
-                        <button class="delete-disco" onclick="window.location.href='/excluir-disco/<%= disco.id %>'">
-                            <i class="fas fa-trash"></i> Excluir
-                        </button>
+
+                        <form action="/discos/<%= disco.id %>" method="POST" onsubmit="return confirm('Você tem certeza que deseja excluir este disco?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="delete-disco">
+                                <i class="fas fa-trash"></i> Excluir
+                            </button>
+                          </form>
+
                     </div>
                 </div>
             <% }) %>
