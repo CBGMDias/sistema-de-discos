@@ -15,7 +15,7 @@ router.get('/:id', faixaController.getFaixaById);
 router.get('/:id/edit', faixaController.renderEditFaixaForm);
 
 // Rota para atualizar um faixa
-router.put('/:id', faixaController.updateFaixa);
+router.post('/:id/edit', faixaController.updateFaixa);
 
 // Rota para deletar um faixa
 router.post('/:id', faixaController.deleteFaixa);
