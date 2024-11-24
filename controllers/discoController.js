@@ -166,8 +166,6 @@ const deleteDisco = async (req, res) => {
                 fs.unlink(`public/${disco.capa}`, (err) => {
                     if (err) {
                         console.error(`Erro ao excluir a capa do disco: ${err}`);
-                    } else {
-                        console.log(`Capa excluída: ${disco.capa}`);
                     }
                 });
             }

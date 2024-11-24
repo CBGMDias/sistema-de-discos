@@ -37,9 +37,14 @@
                         <button class="edit-artist" onclick="window.location.href='/editar-artista/<%= artista.id %>'">
                             <i class="fas fa-edit"></i> Editar
                         </button>
-                        <button class="delete-artist" onclick="window.location.href='/excluir-artista/<%= artista.id %>'">
-                            <i class="fas fa-trash"></i> Excluir
-                        </button>
+
+                        <form action="/artistas/<%= artista.id %>" method="POST" onsubmit="return confirm('Você tem certeza que deseja excluir este artista?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="delete-artist">
+                                <i class="fas fa-trash"></i> Excluir
+                            </button>
+                        </form>  
+
                     </div>
                 </div>
             <% }) %>

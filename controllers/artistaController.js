@@ -117,15 +117,37 @@ const updateArtista = async (req, res) => {
     }
 };
 
-// Deletar um artista
+const fs = require('fs'); // Importar o módulo File System
+
+// Rota para deletar um artista
 const deleteArtista = async (req, res) => {
     try {
-        await Artista.destroy({
-            where: { id: req.params.id }
-        });
-        res.redirect('/artistas');
+        const artistaId = req.params.id;
+
+        // Verificar se o artista existe
+        const artista = await Artista.findByPk(artistaId);
+
+        if (!artista) {
+            return res.status(404).send('Artista não encontrado');
+        }
+
+        // Excluir a imagem da capa do artista, se existir
+        if (artista.capa) {
+            fs.unlink(`public/${artista.capa}`, (err) => {
+                if (err) {
+                    console.error(`Erro ao excluir a capa do artista: ${err}`);
+                }
+            });
+        }
+
+        // Excluir o artista
+        await artista.destroy();
+
+        // Redirecionar após exclusão
+        return res.redirect('/artistas');
     } catch (error) {
-        res.status(500).send('Erro ao deletar artista');
+        console.error('Erro ao excluir artista:', error);
+        return res.status(500).send('Erro ao excluir o artista');
     }
 };
 

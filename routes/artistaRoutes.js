@@ -22,6 +22,6 @@ router.get('/:id/edit', artistaController.renderEditArtistaForm);
 router.put('/:id', artistaController.updateArtista);
 
 // Rota para deletar um artista
-router.delete('/:id', artistaController.deleteArtista);
+router.post('/:id', artistaController.deleteArtista);
 
 module.exports = router;
