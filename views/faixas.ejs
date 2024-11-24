@@ -55,9 +55,14 @@
                 <button class="edit-faixa" onclick="window.location.href='/editar-faixa/<%= faixa.id %>'">
                   <i class="fas fa-edit"></i> Editar
                 </button>
-                <button class="delete-faixa" onclick="window.location.href='/excluir-faixa/<%= faixa.id %>'">
-                  <i class="fas fa-trash"></i> Excluir
-                </button>
+        
+                <form action="/faixas/<%= faixa.id %>" method="POST" onsubmit="return confirm('Você tem certeza que deseja excluir esta faixa?');">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <button type="submit" class="delete-faixa">
+                      <i class="fas fa-trash"></i> Excluir
+                  </button>
+                </form>
+
               </div>
             </div>
           <% }) %>

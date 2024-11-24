@@ -89,14 +89,47 @@ const updateFaixa = async (req, res) => {
 
 // Deletar um faixa
 const deleteFaixa = async (req, res) => {
+    const faixaId = req.params.id;
+    
     try {
-        await Faixa.destroy({
-            where: { id: req.params.id }
-        });
+        // Verificar se a faixa existe
+        const faixa = await Faixa.findByPk(faixaId);
+
+        if (!faixa) {
+            return res.status(404).send('Faixa não encontrada');
+        }
+
+        // Excluir a faixa
+        await faixa.destroy();
+
+        // Redirecionar para a página de faixas após exclusão
         res.redirect('/faixas');
     } catch (error) {
-        res.status(500).send('Erro ao deletar faixa');
+        res.status(500).send('Erro ao excluir a faixa');
     }
+};
+
+const postAuxiliar = async (req, res) => {
+    const method = req.body._method;
+
+    if (method === 'DELETE') {
+        try {
+            const faixaId = req.params.id;
+            const faixa = await Faixa.findByPk(faixaId);
+
+            if (!faixa) {
+                return res.status(404).send('Faixa não encontrada');
+            }
+
+            await faixa.destroy();
+            return res.redirect('/faixas');
+        } catch (error) {
+            console.error(error);
+            return res.status(500).send('Erro ao excluir a faixa');
+        }
+    }
+
+    return res.status(405).send('Método não permitido');
 };
 
 module.exports = {
@@ -106,5 +139,6 @@ module.exports = {
     addFaixa,
     renderEditFaixaForm,
     updateFaixa,
-    deleteFaixa
+    deleteFaixa,
+    postAuxiliar
 };
