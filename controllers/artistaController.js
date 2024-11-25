@@ -1,4 +1,5 @@
 const { Artista, Disco, Genero, ArtistaGenero, sequelize } = require('../models');
+const path = require('path');
 
 // Listar todos os artistas
 const getAllArtistas = async (req, res) => {
@@ -95,7 +96,7 @@ const renderEditArtistaForm = async (req, res) => {
     try {
         const artista = await Artista.findByPk(req.params.id);
         if (artista) {
-            res.render('artistas/edit', { artista });
+            res.render('artistasEdit', { artista });
         } else {
             res.status(404).send('Artista não encontrado');
         }
@@ -104,17 +105,85 @@ const renderEditArtistaForm = async (req, res) => {
     }
 };
 
-// Atualizar um artista existente
-const updateArtista = async (req, res) => {
-    try {
-        const { nome, nacionalidade, generos, foto } = req.body;
-        await Artista.update({ nome, nacionalidade, foto }, {
-            where: { id: req.params.id }
-        });
-        res.redirect('/artistas');
-    } catch (error) {
-        res.status(500).send('Erro ao atualizar artista');
+// Atualizar dados do artista
+const updateDadosArtista = async (req, res) => {
+    const method = req.body._method;
+
+    if (method === 'PUT') {
+        try {
+            const artistaId = req.params.id;
+
+            // Verificar se o artista existe
+            const artista = await Artista.findByPk(artistaId);
+
+            if (!artista) {
+                return res.status(404).send('Artista não encontrado');
+            }
+
+            // Atualizar apenas nome e nacionalidade
+            const { nome, nacionalidade } = req.body;
+
+            await artista.update({
+                nome: nome || artista.nome,
+                nacionalidade: nacionalidade || artista.nacionalidade
+            });
+
+            // Redirecionar após a atualização
+            return res.redirect(`/artistas/${artistaId}/edit`);
+        } catch (error) {
+            console.error('Erro ao atualizar artista:', error);
+            return res.status(500).send('Erro ao atualizar o artista');
+        }
     }
+
+    // Método não permitido
+    return res.status(405).send('Método não permitido');
+};
+
+// Atualizar foto do artista
+const updateFotoArtista = async (req, res) => {
+    const method = req.body._method;
+
+    if (method === 'PUT') {
+        try {
+            const artistaId = req.params.id;
+
+            // Verificar se o artista existe
+            const artista = await Artista.findByPk(artistaId);
+
+            if (!artista) {
+                return res.status(404).send('Artista não encontrado');
+            }
+
+            // Se houver um arquivo de nova foto, substituímos
+            if (req.file) {
+                // Apagar a foto anterior
+                const caminhoAntigo = artista.foto;
+                if (caminhoAntigo) {
+                    const caminhoArquivoAntigo = path.join(__dirname, '..', 'public', caminhoAntigo);
+                    if (fs.existsSync(caminhoArquivoAntigo)) {
+                        fs.unlinkSync(caminhoArquivoAntigo); // Apaga a foto antiga
+                    }
+                }
+
+                // Atualiza a foto com a nova
+                const foto = req.file ? req.file.path.replace(/\\/g, '/').replace('public/', '') : null;
+
+                // Atualiza o campo foto no banco
+                await artista.update({ foto });
+            }
+
+            // Redirecionar após atualização
+            return res.redirect(`/artistas/${artistaId}/edit`);
+
+        } catch (error) {
+            console.error('Erro ao atualizar a foto do artista:', error);
+            return res.status(500).send('Erro ao atualizar a foto');
+        }
+    }
+
+    // Método não permitido
+    return res.status(405).send('Método não permitido');
 };
 
 const fs = require('fs'); // Importar o módulo File System
@@ -157,6 +226,7 @@ module.exports = {
     renderAddArtistaForm,
     addArtista,
     renderEditArtistaForm,
-    updateArtista,
+    updateDadosArtista,
+    updateFotoArtista,
     deleteArtista
 };
