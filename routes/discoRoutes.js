@@ -19,7 +19,10 @@ router.get('/:id', discoController.getDiscoById);
 router.get('/:id/edit', discoController.renderEditDiscoForm);
 
 // Rota para atualizar um disco
-router.put('/:id', discoController.updateDisco);
+//router.put('/:id', discoController.updateDisco);
+
+// Rota pra atualizar nome e ano do disco
+router.post('/:id/edit/dados', discoController.updateNomeAnoDisco)
 
 // Rota para deletar um disco
 router.post('/:id', discoController.deleteDisco);

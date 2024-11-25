@@ -48,8 +48,6 @@ const getDiscoById = async (req, res) => {
       res.status(500).send('Erro ao buscar o disco');
     }
   };
-  
-  
 
 // Exibir formulário para adicionar novo disco
 const renderAddDiscoForm = async (req, res) => {
@@ -116,8 +114,9 @@ const addDisco = async (req, res) => {
 const renderEditDiscoForm = async (req, res) => {
     try {
         const disco = await Disco.findByPk(req.params.id);
+        const faixa = await Faixa.findAll();
         if (disco) {
-            res.render('discos/edit', { disco });
+            res.render('discosEdit', { disco, faixa });
         } else {
             res.status(404).send('Disco não encontrado');
         }
@@ -126,17 +125,39 @@ const renderEditDiscoForm = async (req, res) => {
     }
 };
 
-// Atualizar um disco existente
-const updateDisco = async (req, res) => {
-    try {
-        const { titulo, ano_lancamento, capa, artistaId } = req.body;
-        await Disco.update({ titulo, ano_lancamento, capa, artistaId }, {
-            where: { id: req.params.id }
-        });
-        res.redirect('/discos');
-    } catch (error) {
-        res.status(500).send('Erro ao atualizar disco');
-    }
+// Atualizar dados do disco
+const updateNomeAnoDisco = async (req, res) => {
+  const method = req.body._method;
+
+  if (method === 'PUT') {
+      try {
+          const discoId = req.params.id;
+
+          // Verificar se o disco existe
+          const disco = await Disco.findByPk(discoId);
+
+          if (!disco) {
+              return res.status(404).send('Disco não encontrado');
+          }
+
+          // Atualizar apenas título e ano de lançamento
+          const { titulo, ano_lancamento } = req.body;
+
+          await disco.update({
+              titulo: titulo || disco.titulo,
+              ano_lancamento: ano_lancamento || disco.ano_lancamento
+          });
+
+          // Redirecionar após a atualização
+          return res.redirect(`/discos/${discoId}/edit`);
+      } catch (error) {
+          console.error('Erro ao atualizar disco:', error);
+          return res.status(500).send('Erro ao atualizar o disco');
+      }
+  }
+
+  // Método não permitido
+  return res.status(405).send('Método não permitido');
 };
 
 const fs = require('fs'); // Importar o módulo File System
@@ -191,6 +212,6 @@ module.exports = {
     renderAddDiscoForm,
     addDisco,
     renderEditDiscoForm,
-    updateDisco,
+    updateNomeAnoDisco,
     deleteDisco
 };
