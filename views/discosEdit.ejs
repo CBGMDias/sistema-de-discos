@@ -70,14 +70,19 @@
                 <% }) %>
             </ul>
         </div>
-
     
         <!-- Frame para foto -->
         <div class="disco-foto">
             <h2>Foto</h2>
-            <!-- Conteúdo será adicionado posteriormente -->
+            <img src="/<%= disco.capa %>" alt="Capa do Disco" width="200">
+            <form action="/discos/<%= disco.id %>/edit/capa" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="_method" value="PUT">
+                <label for="capa">Escolher nova foto:</label>
+                <input type="file" id="capa" name="capa" accept="image/*" required>
+                <button type="submit" class="confirm-edit-button">Substituir Foto</button>
+            </form>
         </div>
-    </div>    
+  
 
     <footer>
         <p>© 2024 BraunBeat. Todos os direitos reservados.</p>

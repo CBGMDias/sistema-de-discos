@@ -71,6 +71,7 @@ nav a:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     max-width: 1000px;
     margin: 0 auto;
+    flex-wrap: wrap; /* Adicionado para garantir que o layout seja responsivo */
 }
 
 /* Estilo para os containers internos */
@@ -80,6 +81,7 @@ nav a:hover {
     background-color: #2a2a2a;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    min-width: 300px; /* Garante que as seções não fiquem muito pequenas */
 }
 
 /* Título de cada container */
@@ -111,6 +113,7 @@ nav a:hover {
     font-weight: bold;
 }
 
+/* Inputs do formulário */
 .form-group input {
     padding: 10px;
     font-size: 16px;
@@ -118,6 +121,24 @@ nav a:hover {
     border-radius: 5px;
     background-color: #1c1c1c;
     color: #fff;
+}
+
+/* Estiliza o input de arquivo */
+#capa {
+    padding: 10px;
+    border: 1px solid #FF4057;
+    border-radius: 5px;
+    background-color: #1c1c1c;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%; /* Faz o input de arquivo ocupar 100% da largura do container */
+    box-sizing: border-box; /* Garante que o padding e border sejam contados na largura total */
+}
+
+#capa:focus {
+    outline: none;
+    border-color: #28a745; /* Altera a cor da borda quando em foco */
 }
 
 /* Botão de envio no formulário */
@@ -136,6 +157,7 @@ nav a:hover {
     background-color: #218838;
 }
 
+/* Estilo para a lista de faixas */
 .faixa-list {
     list-style: none;
     padding: 0;
@@ -194,14 +216,47 @@ nav a:hover {
     background-color: #c82333;
 }
 
+/* Estilo para a foto do disco */
+.disco-foto img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: block;
+    margin: 0 auto;
+}
+
+.disco-foto input[type="file"] {
+    margin-top: 10px;
+}
+
+.confirm-edit-button {
+    padding: 10px 20px;
+    background-color: #FF4057;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 10px auto;
+}
+
+.confirm-edit-button:hover {
+    background-color: #d83d53;
+}
+
 /* Footer */
 footer {
     text-align: center;
     margin-top: 20px;
     font-size: 0.9em;
     color: #555;
+    width: 100%;
+    padding: 10px;
+    background-color: #1c1c1c; /* Adiciona fundo ao footer */
 }
 
 footer p {
-    margin: 10px 0;
+    margin: 0;
 }

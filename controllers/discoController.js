@@ -1,4 +1,5 @@
 const { Disco, Faixa, Artista, Genero, FaixaGenero, sequelize } = require('../models');
+const path = require('path');
 
 // Listar todos os discos
 const getAllDiscos = async (req, res) => {
@@ -160,6 +161,52 @@ const updateNomeAnoDisco = async (req, res) => {
   return res.status(405).send('Método não permitido');
 };
 
+// Atualizar capa do disco
+const updateCapa = async (req, res) => {
+  const method = req.body._method;
+
+  if (method === 'PUT') {
+      try {
+          const discoId = req.params.id;
+
+          // Verificar se o disco existe
+          const disco = await Disco.findByPk(discoId);
+
+          if (!disco) {
+              return res.status(404).send('Disco não encontrado');
+          }
+
+          // Se houver um arquivo de nova capa, substituímos
+          if (req.file) {
+              // Apagar a capa anterior
+              const caminhoAntigo = disco.capa;
+              if (caminhoAntigo) {
+                  const caminhoArquivoAntigo = path.join(__dirname, '..', 'public', caminhoAntigo);
+                  if (fs.existsSync(caminhoArquivoAntigo)) {
+                      fs.unlinkSync(caminhoArquivoAntigo); // Apaga a capa antiga
+                  }
+              }
+
+              // Atualiza a capa com a nova
+              const capa = req.file ? req.file.path.replace(/\\/g, '/').replace('public/', '') : null;
+
+              // Atualiza o campo capa no banco
+              await disco.update({ capa });
+          }
+
+          // Redirecionar após atualização
+          return res.redirect(`/discos/${discoId}/edit`);
+
+      } catch (error) {
+          console.error('Erro ao atualizar a capa do disco:', error);
+          return res.status(500).send('Erro ao atualizar a capa');
+      }
+  }
+
+  // Método não permitido
+  return res.status(405).send('Método não permitido');
+};
+
 const fs = require('fs'); // Importar o módulo File System
 
 // Rota para deletar um disco
@@ -213,5 +260,6 @@ module.exports = {
     addDisco,
     renderEditDiscoForm,
     updateNomeAnoDisco,
+    updateCapa,
     deleteDisco
 };
