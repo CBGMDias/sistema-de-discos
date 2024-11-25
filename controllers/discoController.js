@@ -114,9 +114,9 @@ const addDisco = async (req, res) => {
 const renderEditDiscoForm = async (req, res) => {
     try {
         const disco = await Disco.findByPk(req.params.id);
-        const faixa = await Faixa.findAll();
+        const faixas = await Faixa.findAll();
         if (disco) {
-            res.render('discosEdit', { disco, faixa });
+            res.render('discosEdit', { disco, faixas });
         } else {
             res.status(404).send('Disco não encontrado');
         }

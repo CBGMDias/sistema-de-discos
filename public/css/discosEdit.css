@@ -136,6 +136,64 @@ nav a:hover {
     background-color: #218838;
 }
 
+.faixa-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.faixa-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    color: #fff;
+}
+
+.faixa-item:last-child {
+    border-bottom: none;
+}
+
+.faixa-titulo {
+    font-size: 18px;
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+.faixa-options {
+    display: flex;
+    gap: 10px;
+}
+
+.faixa-options button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.edit-faixa {
+    background-color: #007bff;
+}
+
+.edit-faixa:hover {
+    background-color: #0056b3;
+}
+
+.delete-faixa {
+    background-color: #dc3545;
+}
+
+.delete-faixa:hover {
+    background-color: #c82333;
+}
+
 /* Footer */
 footer {
     text-align: center;

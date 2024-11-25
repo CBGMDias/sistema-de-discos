@@ -45,11 +45,32 @@
             </form>
         </div>
     
-        <!-- Frame para faixas -->
+       <!-- Frame para faixas -->
         <div class="disco-faixas">
             <h2>Faixas</h2>
-            <!-- Conteúdo será adicionado posteriormente -->
+            <ul class="faixa-list">
+                <% faixas.forEach((faixa) => { %>
+                <% if (faixa.discoId === disco.id) { %>
+                <li class="faixa-item">
+                    <span class="faixa-titulo"><%= faixa.titulo %></span>
+                    <!-- Opções de editar e excluir faixa -->
+                    <div class="faixa-options">
+                        <button class="edit-faixa" onclick="window.location.href='/faixas/<%= faixa.id %>/edit'">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
+                        <form action="/faixas/<%= faixa.id %>" method="POST" onsubmit="return confirm('Você tem certeza que deseja excluir esta faixa?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="delete-faixa">
+                                <i class="fas fa-trash"></i> Excluir
+                            </button>
+                        </form>
+                    </div>
+                </li>
+                <% } %>
+                <% }) %>
+            </ul>
         </div>
+
     
         <!-- Frame para foto -->
         <div class="disco-foto">
