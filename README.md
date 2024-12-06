@@ -1,6 +1,6 @@
 # Braun Beat
-Um projeto feito em Node para um catálogo musical, com artistas, discos, faixas e gêneros.
- Home:
+Um projeto feito em Node para um catálogo musical, com artistas, discos, faixas e gêneros. /n <br>
+Home:
  ![image](https://github.com/user-attachments/assets/4f3d58e8-d07a-4e1a-8b27-1b7760646e1e)
 
 Artistas:
